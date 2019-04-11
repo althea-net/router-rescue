@@ -37,7 +37,6 @@ public class Server implements Serializable, Comparable<Server> {
     private Boolean sudoNoPasswd;
     private String shellPath;
     private String sudoPath;
-    private String nohupPath;
     private List<Command> commands;
 
     public String getName() {
@@ -102,14 +101,6 @@ public class Server implements Serializable, Comparable<Server> {
 
     public void setSudoPath(String sudoPath) {
         this.sudoPath = sudoPath;
-    }
-
-    public String getNohupPath() {
-        return nohupPath;
-    }
-
-    public void setNohupPath(String nohupPath) {
-        this.nohupPath = nohupPath;
     }
 
     @JsonManagedReference

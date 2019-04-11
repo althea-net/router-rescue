@@ -20,8 +20,12 @@
 
 package it.skarafaz.mercury.manager;
 
+import it.skarafaz.mercury.MercuryApplication;
+
 import android.Manifest;
+import android.os.Bundle;
 import android.os.Environment;
+import android.content.res.AssetManager;
 import it.skarafaz.mercury.MercuryApplication;
 import it.skarafaz.mercury.jackson.ServerMapper;
 import it.skarafaz.mercury.jackson.ValidationException;
@@ -36,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.io.InputStream;
+
 
 public class ConfigManager {
     private static final Logger logger = LoggerFactory.getLogger(ConfigManager.class);
@@ -45,11 +51,13 @@ public class ConfigManager {
     private File configDir;
     private ServerMapper mapper;
     private List<Server> servers;
+    private AssetManager assetManager;
 
     private ConfigManager() {
         configDir = new File(Environment.getExternalStorageDirectory(), CONFIG_DIR);
         mapper = new ServerMapper();
         servers = new ArrayList<>();
+        assetManager = MercuryApplication.getContext().getAssets();
     }
 
     public static synchronized ConfigManager getInstance() {
@@ -74,9 +82,17 @@ public class ConfigManager {
         if (MercuryApplication.isExternalStorageReadable()) {
             if (MercuryApplication.hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 if (configDir.exists() && configDir.isDirectory()) {
+                    try {
+                        servers.add(mapper.readValue(assetManager.open("fix.config")));
+                    }
+                    catch (IOException | ValidationException e) {
+                        status = LoadConfigFilesStatus.ERROR;
+                        logger.error(e.getMessage().replace("\n", " "));
+                    }
                     for (File file : listConfigFiles()) {
                         try {
                             servers.add(mapper.readValue(file));
+
                         } catch (IOException | ValidationException e) {
                             status = LoadConfigFilesStatus.ERROR;
                             logger.error(e.getMessage().replace("\n", " "));

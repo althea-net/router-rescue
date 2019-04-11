@@ -31,13 +31,24 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.io.InputStream;
 
 public class ServerMapper {
     private ObjectMapper mapper;
 
     public ServerMapper() {
         mapper = new ObjectMapper();
+    }
+
+    public Server readValue(InputStream src) throws IOException, ValidationException {
+        Server server = mapper.readValue(src, Server.class);
+        Map<String, String> errors = validateServer(server);
+        if (errors.size() > 0) {
+            throw new ValidationException(getValidationErrorMessage(src, errors));
+        }
+        return server;
     }
 
     public Server readValue(File src) throws IOException, ValidationException {
@@ -77,9 +88,6 @@ public class ServerMapper {
         if (StringUtils.isBlank(server.getSudoPath())) {
             server.setSudoPath("sudo");
         }
-        if (StringUtils.isBlank(server.getNohupPath())) {
-            server.setNohupPath("nohup");
-        }
         if (server.getCommands() == null) {
             server.setCommands(new ArrayList<Command>());
         } else {
@@ -99,12 +107,25 @@ public class ServerMapper {
             command.setSudo(Boolean.FALSE);
         }
         if (StringUtils.isBlank(command.getCmd())) {
-            errors.put(String.format("commands[%d].cmd", index), getString(R.string.validation_missing));
+            errors.put(String.format(Locale.getDefault(),"commands[%d].cmd", index), getString(R.string.validation_missing));
         }
         if (command.getConfirm() == null) {
             command.setConfirm(Boolean.FALSE);
         }
         return errors;
+    }
+
+    private String getValidationErrorMessage(InputStream src, Map<String, String> errors) {
+        StringBuilder sb = new StringBuilder(getString(R.string.validation_file, src));
+        int i = 1;
+        for (Map.Entry<String, String> entry : errors.entrySet()) {
+            sb.append(String.format(" %s %s", entry.getKey(), entry.getValue()));
+            if (i != errors.entrySet().size()) {
+                sb.append(", ");
+            }
+            i++;
+        }
+        return sb.toString();
     }
 
     private String getValidationErrorMessage(File src, Map<String, String> errors) {
