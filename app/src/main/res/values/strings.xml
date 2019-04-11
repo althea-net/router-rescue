@@ -22,7 +22,7 @@
 
 <resources>
 
-    <string name="app_name">Mercury-SSH</string>
+    <string name="app_name">Althea Router Rescue</string>
 
     <string name="title_activity_help">Help</string>
     <string name="title_activity_log">Log</string>

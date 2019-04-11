@@ -33,6 +33,7 @@ public class Command implements Serializable, Comparable<Command> {
     private String cmd;
     private Boolean confirm;
     private Server server;
+    private String description;
 
     public String getName() {
         return name;
@@ -55,6 +56,14 @@ public class Command implements Serializable, Comparable<Command> {
     }
 
     public void setCmd(String cmd) {
+        this.cmd = cmd;
+    }
+
+    public String getDescription() {
+        return cmd;
+    }
+
+    public void setDescription(String cmd) {
         this.cmd = cmd;
     }
 

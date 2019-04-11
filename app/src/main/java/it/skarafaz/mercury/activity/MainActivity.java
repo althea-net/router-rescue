@@ -110,9 +110,6 @@ public class MainActivity extends MercuryActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_reload:
-                loadConfigFiles();
-                return true;
             case R.id.action_help:
                 startActivity(new Intent(this, HelpActivity.class));
                 return true;
