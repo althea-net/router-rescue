@@ -144,7 +144,7 @@ public abstract class SshCommand extends Thread {
 
             // get I/O streams for remote scp
             OutputStream out = channel.getOutputStream();
-            InputStream in=channel.getInputStream();
+            InputStream in = channel.getInputStream();
 
 
             channel.connect();
@@ -152,7 +152,6 @@ public abstract class SshCommand extends Thread {
             if (checkAck(in) != 0) {
                 System.exit(0);
             }
-
 
 
             Date date = new Date();
@@ -206,12 +205,13 @@ public abstract class SshCommand extends Thread {
             out.close();
 
             channel.disconnect();
-            session.disconnect();
         } catch (Exception e) {
-            System.out.println(e);
+            logger.error(String.valueOf(e));
             return false;
         }
-        return normalCommand("sysupgrade -v -n /tmp/sysupgrade.bin");
+        logger.debug("Finished copying, running upgrade command");
+        String upgrade_cmd = String.format("%s -c \"(%s) &> /dev/null 2>&1\"", shellPath, "sysupgrade -v -n /tmp/sysupgrade.bin");
+        return normalCommand(upgrade_cmd);
     }
 
 
@@ -246,6 +246,7 @@ public abstract class SshCommand extends Thread {
 
 
     boolean normalCommand(String cmd) {
+        logger.debug("Running command: {}", cmd);
         ChannelExec channel = null;
 
         boolean success = true;
