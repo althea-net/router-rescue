@@ -62,7 +62,7 @@ public class CommandListAdapter extends ArrayAdapter<Command> {
             public void onClick(View v) {
                 new MaterialDialog.Builder(getContext())
                         .title(command.getName())
-                        .content(command.getCmd())
+                        .content(command.getDescription())
                         .show();
             }
         });

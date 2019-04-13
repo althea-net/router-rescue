@@ -46,7 +46,7 @@ public class SshEventSubscriber {
     public void onSshCommandConfirm(final SshCommandConfirm event) {
         new MaterialDialog.Builder(activity)
                 .title(R.string.confirm_exec)
-                .content(event.getCmd())
+                .content(event.getDescription())
                 .positiveText(R.string.ok)
                 .negativeText(R.string.cancel)
                 .cancelable(false)

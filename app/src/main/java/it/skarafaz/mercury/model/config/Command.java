@@ -60,11 +60,11 @@ public class Command implements Serializable, Comparable<Command> {
     }
 
     public String getDescription() {
-        return cmd;
+        return description;
     }
 
-    public void setDescription(String cmd) {
-        this.cmd = cmd;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Boolean getConfirm() {

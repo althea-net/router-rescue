@@ -45,6 +45,7 @@ public class SshCommandRegular extends SshCommand {
         this.password = command.getServer().getPassword();
         this.shellPath = command.getServer().getShellPath();
         this.cmd = command.getCmd();
+        this.description = command.getDescription();
         this.confirm = command.getConfirm();
     }
 
@@ -52,7 +53,7 @@ public class SshCommandRegular extends SshCommand {
     protected boolean beforeExecute() {
         if (confirm) {
             SshCommandDrop<Boolean> drop = new SshCommandDrop<>();
-            EventBus.getDefault().postSticky(new SshCommandConfirm(cmd, drop));
+            EventBus.getDefault().postSticky(new SshCommandConfirm(cmd, description, drop));
 
             if (!drop.take()) {
                 return false;

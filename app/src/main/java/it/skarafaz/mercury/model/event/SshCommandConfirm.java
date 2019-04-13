@@ -24,16 +24,20 @@ import it.skarafaz.mercury.ssh.SshCommandDrop;
 
 public class SshCommandConfirm {
     private String cmd;
+    private String description;
     private SshCommandDrop<Boolean> drop;
 
-    public SshCommandConfirm(String cmd, SshCommandDrop<Boolean> drop) {
+    public SshCommandConfirm(String cmd, String description, SshCommandDrop<Boolean> drop) {
         this.cmd = cmd;
+        this.description = description;
         this.drop = drop;
     }
 
     public String getCmd() {
         return cmd;
     }
+
+    public String getDescription() { return description; }
 
     public SshCommandDrop<Boolean> getDrop() {
         return drop;
