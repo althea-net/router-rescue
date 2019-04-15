@@ -57,9 +57,11 @@ public class SshCommandUserInfo implements UserInfo {
 
     @Override
     public boolean promptYesNo(String message) {
-        SshCommandDrop<Boolean> drop = new SshCommandDrop<>();
-        EventBus.getDefault().postSticky(new SshCommandYesNo(message, drop));
-        return drop.take();
+        // never prompt the user for ssh keys during router rescue
+        //SshCommandDrop<Boolean> drop = new SshCommandDrop<>();
+        //EventBus.getDefault().postSticky(new SshCommandYesNo(message, drop));
+        //return drop.take();
+        return true;
     }
 
     @Override

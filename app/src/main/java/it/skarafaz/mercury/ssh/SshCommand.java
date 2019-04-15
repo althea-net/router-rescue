@@ -127,7 +127,7 @@ public abstract class SshCommand extends Thread {
         return out.toByteArray();
     }
 
-    boolean copyCommand(String cmd, String name) {
+    boolean copyCommand(String name) {
         logger.debug("Detected firmware upload!");
         AssetManager assetManager = MercuryApplication.getContext().getAssets();
         try {
@@ -274,8 +274,16 @@ public abstract class SshCommand extends Thread {
     protected boolean send(String cmd) {
         logger.debug("sending command: {}", cmd);
         if (cmd.contains("GLB1300-FIRMWARE-UPGRADE")) {
-            return copyCommand(cmd, "glb1300.bin");
-        } else {
+            return copyCommand("glb1300.bin");
+        } else if (cmd.contains("N600-FIRMWARE-UPGRADE"))
+        {
+            return copyCommand("n600.bin");
+        } else if (cmd.contains("N750-FIRMWARE-UPGRADE")) {
+            return copyCommand("n750.bin");
+        } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE")) {
+            return copyCommand("wrt3200acm.bin");
+        }
+        else {
             return normalCommand(cmd);
         }
     }

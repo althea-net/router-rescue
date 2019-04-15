@@ -38,10 +38,10 @@ import java.io.IOException;
 public class SshManager {
     private static final String SSH_DIR = "ssh";
     private static final String KNOWN_HOSTS_FILE = "known_hosts";
-    private static final int PRIVATE_KEY_LENGTH = 2048;
+    private static final int PRIVATE_KEY_LENGTH = 4096;
     private static final String PRIVATE_KEY_FILE = "id_rsa";
     private static final String PUBLIC_KEY_FILE = "id_rsa.pub";
-    private static final String PUBLIC_KEY_COMMENT = "mercuryssh";
+    private static final String PUBLIC_KEY_COMMENT = "althea routerrescue";
     private static final Logger logger = LoggerFactory.getLogger(SshCommandRegular.class);
     private static SshManager instance;
     private JSch jsch;
