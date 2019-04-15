@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    lintOptions {
+        abortOnError false
+    }
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
@@ -8,7 +11,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 8
-        versionName "1.2.2-SNAPSHOT"
+        versionName "1.2.3"
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [eventBusIndex: 'it.skarafaz.mercury.EventBusIndex']
