@@ -127,7 +127,7 @@ public abstract class SshCommand extends Thread {
         return out.toByteArray();
     }
 
-    boolean copyCommand(String name) {
+    boolean copyCommand(String name, Boolean preserve_state) {
         logger.debug("Detected firmware upload!");
         AssetManager assetManager = MercuryApplication.getContext().getAssets();
         try {
@@ -210,7 +210,19 @@ public abstract class SshCommand extends Thread {
             return false;
         }
         logger.debug("Finished copying, running upgrade command");
-        String upgrade_cmd = String.format("%s -c \"(%s) &> /dev/null 2>&1\"", shellPath, "sysupgrade -v -n /tmp/sysupgrade.bin");
+
+        String sysupgrade_args;
+
+        if(preserve_state) {
+            sysupgrade_args = "-c -v";
+        }
+        else {
+            sysupgrade_args="-n -v";
+        }
+        String sysupgrade_cmd = String.format("sysupgrade %s /tmp/sysupgrade.bin", sysupgrade_args);
+
+
+        String upgrade_cmd = String.format("%s -c \"(%s) &> /dev/null 2>&1\"", shellPath, sysupgrade_cmd);
         return normalCommand(upgrade_cmd);
     }
 
@@ -274,14 +286,24 @@ public abstract class SshCommand extends Thread {
     protected boolean send(String cmd) {
         logger.debug("sending command: {}", cmd);
         if (cmd.contains("GLB1300-FIRMWARE-UPGRADE")) {
-            return copyCommand("glb1300.bin");
+            return copyCommand("glb1300.bin", false);
         } else if (cmd.contains("N600-FIRMWARE-UPGRADE"))
         {
-            return copyCommand("n600.bin");
+            return copyCommand("n600.bin", false);
         } else if (cmd.contains("N750-FIRMWARE-UPGRADE")) {
-            return copyCommand("n750.bin");
+            return copyCommand("n750.bin", false);
         } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE")) {
-            return copyCommand("wrt3200acm.bin");
+            return copyCommand("wrt3200acm.bin", false);
+        }
+        else if (cmd.contains("GLB1300-FIRMWARE-UPGRADE-PRESERVE")) {
+            return copyCommand("glb1300.bin", true);
+        } else if (cmd.contains("N600-FIRMWARE-UPGRADE-PRESERVE"))
+        {
+            return copyCommand("n600.bin", true);
+        } else if (cmd.contains("N750-FIRMWARE-UPGRADE-PRESERVE")) {
+            return copyCommand("n750.bin", true);
+        } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE-PRESERVE")) {
+            return copyCommand("wrt3200acm.bin", true);
         }
         else {
             return normalCommand(cmd);
