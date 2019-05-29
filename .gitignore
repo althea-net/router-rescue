@@ -27,3 +27,4 @@ Thumbs.db
 .gradle
 build/
 app/src/main/assets/*.bin
+*.jks
