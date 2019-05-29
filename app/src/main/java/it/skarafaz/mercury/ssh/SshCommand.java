@@ -285,17 +285,7 @@ public abstract class SshCommand extends Thread {
 
     protected boolean send(String cmd) {
         logger.debug("sending command: {}", cmd);
-        if (cmd.contains("GLB1300-FIRMWARE-UPGRADE")) {
-            return copyCommand("glb1300.bin", false);
-        } else if (cmd.contains("N600-FIRMWARE-UPGRADE"))
-        {
-            return copyCommand("n600.bin", false);
-        } else if (cmd.contains("N750-FIRMWARE-UPGRADE")) {
-            return copyCommand("n750.bin", false);
-        } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE")) {
-            return copyCommand("wrt3200acm.bin", false);
-        }
-        else if (cmd.contains("GLB1300-FIRMWARE-UPGRADE-PRESERVE")) {
+        if (cmd.contains("GLB1300-FIRMWARE-UPGRADE-PRESERVE")) {
             return copyCommand("glb1300.bin", true);
         } else if (cmd.contains("N600-FIRMWARE-UPGRADE-PRESERVE"))
         {
@@ -304,7 +294,16 @@ public abstract class SshCommand extends Thread {
             return copyCommand("n750.bin", true);
         } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE-PRESERVE")) {
             return copyCommand("wrt3200acm.bin", true);
+        } else if (cmd.contains("GLB1300-FIRMWARE-UPGRADE")) {
+            return copyCommand("glb1300.bin", false);
+        } else if (cmd.contains("N600-FIRMWARE-UPGRADE")) {
+            return copyCommand("n600.bin", false);
+        } else if (cmd.contains("N750-FIRMWARE-UPGRADE")) {
+            return copyCommand("n750.bin", false);
+        } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE")) {
+            return copyCommand("wrt3200acm.bin", false);
         }
+
         else {
             return normalCommand(cmd);
         }
