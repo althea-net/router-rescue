@@ -10,8 +10,8 @@ android {
         applicationId "org.althea.routerrescue"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 107
-        versionName "1.0.7"
+        versionCode 111
+        versionName "1.0.11"
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [eventBusIndex: 'it.skarafaz.mercury.EventBusIndex']
