@@ -294,6 +294,10 @@ public abstract class SshCommand extends Thread {
             return copyCommand("n750.bin", true);
         } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE-PRESERVE")) {
             return copyCommand("wrt3200acm.bin", true);
+        } else if (cmd.contains("WRT32X-FIRMWARE-UPGRADE-PRESERVE")) {
+            return copyCommand("wrt32x.bin", true);
+        } else if (cmd.contains("EA6350-FIRMWARE-UPGRADE-PRESERVE")) {
+            return copyCommand("ea6350.bin", true);
         } else if (cmd.contains("GLB1300-FIRMWARE-UPGRADE")) {
             return copyCommand("glb1300.bin", false);
         } else if (cmd.contains("N600-FIRMWARE-UPGRADE")) {
@@ -302,6 +306,10 @@ public abstract class SshCommand extends Thread {
             return copyCommand("n750.bin", false);
         } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE")) {
             return copyCommand("wrt3200acm.bin", false);
+        } else if (cmd.contains("WRT32X-FIRMWARE-UPGRADE")) {
+            return copyCommand("wrt32x.bin", false);
+        } else if (cmd.contains("EA6350-FIRMWARE-UPGRADE")) {
+            return copyCommand("ea6350.bin", false);
         }
 
         else {
