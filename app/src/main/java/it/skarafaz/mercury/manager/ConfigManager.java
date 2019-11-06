@@ -80,8 +80,10 @@ public class ConfigManager {
             if (MercuryApplication.hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 if (configDir.exists() && configDir.isDirectory()) {
                     try {
-                        servers.add(mapper.readValue(assetManager.open("working-routers.config")));
-                        servers.add(mapper.readValue(assetManager.open("broken-routers.config")));
+                        servers.add(mapper.readValue(assetManager.open("stable.config")));
+                        servers.add(mapper.readValue(assetManager.open("pre-release.config")));
+                        servers.add(mapper.readValue(assetManager.open("updates.config")));
+                        servers.add(mapper.readValue(assetManager.open("reboot.config")));
                     }
                     catch (IOException | ValidationException e) {
                         status = LoadConfigFilesStatus.ERROR;
@@ -96,7 +98,6 @@ public class ConfigManager {
                             logger.error(e.getMessage().replace("\n", " "));
                         }
                     }
-                    Collections.sort(servers);
                 } else {
                     if (!(MercuryApplication.isExternalStorageWritable() && configDir.mkdirs())) {
                         status = LoadConfigFilesStatus.CANNOT_CREATE_CONFIG_DIR;
