@@ -309,28 +309,14 @@ public abstract class SshCommand extends Thread {
             return copyCommand("wrt32x.bin", false);
         } else if (cmd.contains("EA6350-FIRMWARE-UPGRADE")) {
             return copyCommand("ea6350.bin", false);
-        } else if (cmd.contains("N600-PRERELEASE-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("n600-prerelease.bin", true);
+        } else if (cmd.contains("GLB1300-PRERELEASE-FIRMWARE-UPGRADE-PRESERVE")) {
+            return copyCommand("glb1300-prerelease.bin", true);
         } else if (cmd.contains("N750-PRERELEASE-FIRMWARE-UPGRADE-PRESERVE")) {
             return copyCommand("n750-prerelease.bin", true);
-        } else if (cmd.contains("WRT3200ACM-PRERELEASE-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("wrt3200acm-prerelease.bin", true);
-        } else if (cmd.contains("WRT32X-PRERELEASE-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("wrt32x-prerelease.bin", true);
-        } else if (cmd.contains("EA6350-PRERELEASE-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("ea6350-prerelease.bin", true);
         } else if (cmd.contains("GLB1300-PRERELEASE-FIRMWARE-UPGRADE")) {
             return copyCommand("glb1300-prerelease.bin", false);
-        } else if (cmd.contains("N600-PRERELEASE-FIRMWARE-UPGRADE")) {
-            return copyCommand("n600-prerelease.bin", false);
         } else if (cmd.contains("N750-PRERELEASE-FIRMWARE-UPGRADE")) {
             return copyCommand("n750-prerelease.bin", false);
-        } else if (cmd.contains("WRT3200ACM-PRERELEASE-FIRMWARE-UPGRADE")) {
-            return copyCommand("wrt3200acm-prerelease.bin", false);
-        } else if (cmd.contains("WRT32X-PRERELEASE-FIRMWARE-UPGRADE")) {
-            return copyCommand("wrt32x-prerelease.bin", false);
-        } else if (cmd.contains("EA6350-PRERELEASE-FIRMWARE-UPGRADE")) {
-            return copyCommand("ea6350-prerelease.bin", false);
         }
 
         else {
