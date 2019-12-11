@@ -50,7 +50,7 @@ if test $# -lt 1; then
   mv *openwrt-ar71xx-*-mynet-n750-squashfs-sysupgrade.bin app/src/main/assets/n750.bin
   mv *openwrt-mvebu-cortexa9-linksys-wrt3200acm-squashfs-sysupgrade.bin app/src/main/assets/wrt3200acm.bin
   mv *openwrt-mvebu-cortexa9-linksys-wrt32x-squashfs-sysupgrade.bin app/src/main/assets/wrt32x.bin
-  rm openwrt*
+  rm *openwrt*
 fi
 
 ./gradlew build
