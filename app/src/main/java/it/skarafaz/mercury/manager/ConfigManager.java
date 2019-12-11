@@ -81,7 +81,7 @@ public class ConfigManager {
                 if (configDir.exists() && configDir.isDirectory()) {
                     try {
                         servers.add(mapper.readValue(assetManager.open("stable.config")));
-                        servers.add(mapper.readValue(assetManager.open("pre-release.config")));
+                        // servers.add(mapper.readValue(assetManager.open("pre-release.config")));
                         servers.add(mapper.readValue(assetManager.open("updates.config")));
                         servers.add(mapper.readValue(assetManager.open("reboot.config")));
                     }
