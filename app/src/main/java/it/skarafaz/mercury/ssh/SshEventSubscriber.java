@@ -153,7 +153,7 @@ public class SshEventSubscriber {
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onSshCommandPubKeyInput(final SshCommandPubKeyInput event) {
         new MaterialDialog.Builder(activity)
-                .title(R.string.send_publick_key)
+                .title(R.string.send_public_key)
                 .content(R.string.connection_string_message)
                 .positiveText(R.string.submit)
                 .negativeText(R.string.cancel)

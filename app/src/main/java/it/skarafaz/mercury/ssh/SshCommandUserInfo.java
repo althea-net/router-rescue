@@ -44,7 +44,7 @@ public class SshCommandUserInfo implements UserInfo {
     @Override
     public boolean promptPassword(String message) {
         SshCommandDrop<String> drop = new SshCommandDrop<>();
-        message = String.format(MercuryApplication.getContext().getString(R.string.type_login_password), message.toLowerCase());
+        message = MercuryApplication.getContext().getString(R.string.type_login_password);
         EventBus.getDefault().postSticky(new SshCommandPassword(message, drop));
         password = drop.take();
         return password != null;
