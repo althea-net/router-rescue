@@ -23,8 +23,16 @@ package it.skarafaz.mercury;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -66,6 +74,8 @@ public class MercuryApplication extends Application {
         } catch (Exception e) {
             logger.error(e.getMessage().replace("\n", " "));
         }
+        // allows interacting with offline routers without turning on airplane mode
+        registerHandler();
     }
 
     public static void showProgressDialog(FragmentManager manager, String content) {
@@ -104,5 +114,40 @@ public class MercuryApplication extends Application {
     public static boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    private void registerHandler() {
+        final Context context = MercuryApplication.getContext();
+        final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkRequest.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new NetworkRequest.Builder();
+            //set the transport type do WIFI
+            builder.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+
+            connectivityManager.requestNetwork(builder.build(), new ConnectivityManager.NetworkCallback() {
+                @Override
+                public void onAvailable(Network network) {
+                    //Application.logger.log(String.format("We are connected to a new wifi network, ssid %s", NetworkUtils.getCurrentSsid()));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (Build.VERSION.RELEASE.equalsIgnoreCase("6.0")) {
+                            if (!Settings.System.canWrite(context)) {
+                                Intent goToSettings = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                                goToSettings.setData(Uri.parse("package:" + context.getPackageName()));
+                                context.startActivity(goToSettings);
+                            }
+                        }
+                        connectivityManager.bindProcessToNetwork(null);
+                        connectivityManager.bindProcessToNetwork(network);
+
+                    } else {
+                        //This method was deprecated in API level 23
+                        ConnectivityManager.setProcessDefaultNetwork(null);
+                        ConnectivityManager.setProcessDefaultNetwork(network);
+
+                    }
+                }
+            });
+        }
     }
 }

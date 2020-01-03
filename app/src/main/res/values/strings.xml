@@ -52,7 +52,7 @@
     <string name="cannot_write_ext_storage">Cannot write to external storage</string>
     <string name="command_sent">Command sent!</string>
     <string name="confirm_exec">Confirm action?</string>
-    <string name="connection_failed">Failed to connect to router, you probably need to turn on airplane mode, be sure to enable WiFi when you do!</string>
+    <string name="connection_failed">Failed to connect to router, check that you are connected to it via wifi!</string>
     <string name="connection_init_error">An error occurred during connection initialization, please see log for details</string>
     <string name="connection_string_hint">user@host:port</string>
     <string name="connection_string_message">Type connection string for target server</string>
