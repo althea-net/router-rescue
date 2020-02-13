@@ -48,8 +48,8 @@ if test $# -lt 1; then
   mv *openwrt-ipq40xx-*-linksys_ea6350v3-squashfs-sysupgrade.bin app/src/main/assets/ea6350.bin
   mv *openwrt-ipq40xx-*-glinet_gl-b1300-squashfs-sysupgrade.bin app/src/main/assets/glb1300.bin
   mv *openwrt-ar71xx-*-mynet-n750-squashfs-sysupgrade.bin app/src/main/assets/n750.bin
-  mv *openwrt-mvebu-cortexa9-linksys-wrt3200acm-squashfs-sysupgrade.bin app/src/main/assets/wrt3200acm.bin
-  mv *openwrt-mvebu-cortexa9-linksys-wrt32x-squashfs-sysupgrade.bin app/src/main/assets/wrt32x.bin
+  mv *openwrt-mvebu-cortexa9-linksys_wrt3200acm-squashfs-sysupgrade.bin app/src/main/assets/wrt3200acm.bin
+  mv *openwrt-mvebu-cortexa9-linksys_wrt32x-squashfs-sysupgrade.bin app/src/main/assets/wrt32x.bin
   rm *openwrt*
 fi
 
