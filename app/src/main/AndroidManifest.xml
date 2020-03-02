@@ -21,21 +21,21 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="it.skarafaz.mercury">
+          package="org.althea.routerrescue">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
 
     <application
-            android:name="it.skarafaz.mercury.MercuryApplication"
+            android:name="org.althea.routerrescue.MercuryApplication"
             android:allowBackup="true"
             android:icon="@drawable/ic_rita"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
 
         <activity
-                android:name=".activity.MainActivity"
+                android:name="org.althea.routerrescue.activity.MainActivity"
                 android:label="@string/app_name"
                 android:launchMode="singleTop"
                 android:screenOrientation="portrait">
@@ -46,31 +46,31 @@
         </activity>
 
         <activity
-                android:name=".activity.HelpActivity"
+                android:name="org.althea.routerrescue.activity.HelpActivity"
                 android:label="@string/title_activity_help"
-                android:parentActivityName=".activity.MainActivity">
+                android:parentActivityName="org.althea.routerrescue.activity.MainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="it.skarafaz.mercury.activity.MainActivity"/>
+                    android:value="org.althea.routerrescue.activity.MainActivity"/>
         </activity>
 
         <activity
-                android:name=".activity.SettingsActivity"
+                android:name="org.althea.routerrescue.activity.SettingsActivity"
                 android:label="@string/title_activity_settings"
                 android:launchMode="singleTop"
-                android:parentActivityName=".activity.MainActivity">
+                android:parentActivityName="org.althea.routerrescue.activity.MainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="it.skarafaz.mercury.activity.MainActivity"/>
+                    android:value="org.althea.routerrescue.activity.MainActivity"/>
         </activity>
 
         <activity
-                android:name=".activity.LogActivity"
+                android:name="org.althea.routerrescue.activity.LogActivity"
                 android:label="@string/title_activity_log"
-                android:parentActivityName=".activity.MainActivity">
+                android:parentActivityName="org.althea.routerrescue.activity.MainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="it.skarafaz.mercury.activity.MainActivity"/>
+                    android:value="org.althea.routerrescue.activity.LogActivity"/>
         </activity>
 
     </application>

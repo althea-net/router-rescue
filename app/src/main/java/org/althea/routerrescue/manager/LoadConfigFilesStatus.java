@@ -1,6 +1,6 @@
 /*
  * Mercury-SSH
- * Copyright (C) 2019 Skarafaz
+ * Copyright (C) 2017 Skarafaz
  *
  * This file is part of Mercury-SSH.
  *
@@ -18,24 +18,24 @@
  * along with Mercury-SSH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+package org.althea.routerrescue.manager;
 
-buildscript {
-    repositories {
-        jcenter()
-        google()
+import org.althea.routerrescue.R;
+
+public enum LoadConfigFilesStatus {
+    SUCCESS(R.string.empty_config_dir),
+    ERROR(R.string.load_config_files_error),
+    CANNOT_READ_EXT_STORAGE(R.string.cannot_read_ext_storage),
+    CANNOT_CREATE_CONFIG_DIR(R.string.cannot_create_config_dir),
+    PERMISSION(R.string.load_config_files_permission);
+
+    private int message;
+
+    LoadConfigFilesStatus(int message) {
+        this.message = message;
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-        google()
+    public int message() {
+        return message;
     }
 }

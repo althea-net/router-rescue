@@ -1,6 +1,6 @@
 /*
  * Mercury-SSH
- * Copyright (C) 2019 Skarafaz
+ * Copyright (C) 2017 Skarafaz
  *
  * This file is part of Mercury-SSH.
  *
@@ -18,24 +18,26 @@
  * along with Mercury-SSH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+package org.althea.routerrescue.activity;
 
-buildscript {
-    repositories {
-        jcenter()
-        google()
+import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+
+public abstract class MercuryActivity extends AppCompatActivity {
+    private static final int ACTION_BAR_ELEVATION = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setActionBarElevation();
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-        google()
+    private void setActionBarElevation() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setElevation(ACTION_BAR_ELEVATION);
+        }
     }
 }

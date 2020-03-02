@@ -24,7 +24,7 @@
 
     <fragment
             android:id="@+id/settings_fragment"
-            android:name="it.skarafaz.mercury.fragment.SettingsFragment"
+            android:name="org.althea.routerrescue.fragment.SettingsFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 </FrameLayout>

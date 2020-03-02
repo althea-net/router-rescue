@@ -1,6 +1,6 @@
 /*
  * Mercury-SSH
- * Copyright (C) 2019 Skarafaz
+ * Copyright (C) 2018 Skarafaz
  *
  * This file is part of Mercury-SSH.
  *
@@ -18,24 +18,19 @@
  * along with Mercury-SSH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+package org.althea.routerrescue.fragment;
 
-buildscript {
-    repositories {
-        jcenter()
-        google()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+import android.os.Bundle;
+import android.preference.PreferenceFragment;
+import android.support.annotation.Nullable;
+import org.althea.routerrescue.R;
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
+public class SettingsFragment extends PreferenceFragment {
 
-allprojects {
-    repositories {
-        jcenter()
-        google()
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        addPreferencesFromResource(R.xml.settings);
     }
 }

@@ -1,6 +1,6 @@
 /*
  * Mercury-SSH
- * Copyright (C) 2019 Skarafaz
+ * Copyright (C) 2018 Skarafaz
  *
  * This file is part of Mercury-SSH.
  *
@@ -18,24 +18,18 @@
  * along with Mercury-SSH.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+package org.althea.routerrescue.model.event;
 
-buildscript {
-    repositories {
-        jcenter()
-        google()
+import org.althea.routerrescue.ssh.SshCommandDrop;
+
+public class SshCommandPubKeyInput {
+    SshCommandDrop<String> drop;
+
+    public SshCommandPubKeyInput(SshCommandDrop<String> drop) {
+        this.drop = drop;
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
-
-allprojects {
-    repositories {
-        jcenter()
-        google()
+    public SshCommandDrop<String> getDrop() {
+        return drop;
     }
 }
