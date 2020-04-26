@@ -10,8 +10,8 @@ android {
         applicationId "org.althea.routerrescue"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 131
-        versionName "1.0.31"
+        versionCode 132
+        versionName "1.0.32"
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [eventBusIndex: 'org.althea.routerrescue.EventBusIndex']
