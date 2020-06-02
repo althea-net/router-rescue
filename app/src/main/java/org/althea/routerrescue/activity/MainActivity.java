@@ -163,15 +163,6 @@ public class MainActivity extends MercuryActivity {
                         if (status == LoadConfigFilesStatus.ERROR) {
                             Toast.makeText(MainActivity.this, getString(status.message()), Toast.LENGTH_LONG).show();
                         }
-                    } else {
-                        emptyMessage.setText(getString(status.message(), ConfigManager.getInstance().getConfigDir()));
-                        emptyLayout.setVisibility(View.VISIBLE);
-                        if (status == LoadConfigFilesStatus.PERMISSION) {
-                            settingsButton.setVisibility(View.VISIBLE);
-                            MercuryApplication.requestPermission(MainActivity.this, PRC_WRITE_EXT_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                        } else {
-                            settingsButton.setVisibility(View.GONE);
-                        }
                     }
                     busy = false;
                 }

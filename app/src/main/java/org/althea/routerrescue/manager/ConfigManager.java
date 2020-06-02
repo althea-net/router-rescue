@@ -25,6 +25,7 @@ import org.althea.routerrescue.MercuryApplication;
 import android.Manifest;
 import android.os.Environment;
 import android.content.res.AssetManager;
+
 import org.althea.routerrescue.jackson.ServerMapper;
 import org.althea.routerrescue.jackson.ValidationException;
 import org.althea.routerrescue.model.config.Server;
@@ -44,13 +45,11 @@ public class ConfigManager {
     private static final String CONFIG_DIR = "Mercury-SSH";
     private static final String JSON_EXT = "json";
     private static ConfigManager instance;
-    private File configDir;
     private ServerMapper mapper;
     private List<Server> servers;
     private AssetManager assetManager;
 
     private ConfigManager() {
-        configDir = new File(Environment.getExternalStorageDirectory(), CONFIG_DIR);
         mapper = new ServerMapper();
         servers = new ArrayList<>();
         assetManager = MercuryApplication.getContext().getAssets();
@@ -63,10 +62,6 @@ public class ConfigManager {
         return instance;
     }
 
-    public File getConfigDir() {
-        return configDir;
-    }
-
     public List<Server> getServers() {
         return servers;
     }
@@ -75,43 +70,17 @@ public class ConfigManager {
         servers.clear();
 
         LoadConfigFilesStatus status = LoadConfigFilesStatus.SUCCESS;
-        if (MercuryApplication.isExternalStorageReadable()) {
-            if (MercuryApplication.hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                if (configDir.exists() && configDir.isDirectory()) {
-                    try {
-                        servers.add(mapper.readValue(assetManager.open("stable.config")));
-                        // servers.add(mapper.readValue(assetManager.open("pre-release.config")));
-                        servers.add(mapper.readValue(assetManager.open("updates.config")));
-                        servers.add(mapper.readValue(assetManager.open("reboot.config")));
-                    }
-                    catch (IOException | ValidationException e) {
-                        status = LoadConfigFilesStatus.ERROR;
-                        logger.error(e.getMessage().replace("\n", " "));
-                    }
-                    for (File file : listConfigFiles()) {
-                        try {
-                            servers.add(mapper.readValue(file));
 
-                        } catch (IOException | ValidationException e) {
-                            status = LoadConfigFilesStatus.ERROR;
-                            logger.error(e.getMessage().replace("\n", " "));
-                        }
-                    }
-                } else {
-                    if (!(MercuryApplication.isExternalStorageWritable() && configDir.mkdirs())) {
-                        status = LoadConfigFilesStatus.CANNOT_CREATE_CONFIG_DIR;
-                    }
-                }
-            } else {
-                status = LoadConfigFilesStatus.PERMISSION;
-            }
-        } else {
-            status = LoadConfigFilesStatus.CANNOT_READ_EXT_STORAGE;
+        try {
+            servers.add(mapper.readValue(assetManager.open("stable.config")));
+            // servers.add(mapper.readValue(assetManager.open("pre-release.config")));
+            servers.add(mapper.readValue(assetManager.open("updates.config")));
+            servers.add(mapper.readValue(assetManager.open("reboot.config")));
+        } catch (IOException | ValidationException e) {
+            status = LoadConfigFilesStatus.ERROR;
+            logger.error(e.getMessage().replace("\n", " "));
         }
-        return status;
-    }
 
-    private Collection<File> listConfigFiles() {
-        return FileUtils.listFiles(configDir, new String[] { JSON_EXT, JSON_EXT.toUpperCase() }, false);
+        return status;
     }
 }
