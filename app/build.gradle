@@ -5,13 +5,13 @@ android {
         abortOnError false
     }
     compileSdkVersion 29
-    buildToolsVersion '29.0.2'
+    buildToolsVersion ''
     defaultConfig {
         applicationId "org.althea.routerrescue"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 138
-        versionName "1.0.38"
+        versionCode 151
+        versionName "1.0.51"
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [eventBusIndex: 'org.althea.routerrescue.EventBusIndex']
