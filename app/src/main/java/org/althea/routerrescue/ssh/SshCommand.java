@@ -127,7 +127,7 @@ public abstract class SshCommand extends Thread {
         return out.toByteArray();
     }
 
-    boolean copyCommand(String name, Boolean preserve_state) {
+    boolean copyCommand(String name, Boolean preserve_state, Boolean force) {
         logger.debug("Detected firmware upload!");
         AssetManager assetManager = MercuryApplication.getContext().getAssets();
         try {
@@ -216,7 +216,9 @@ public abstract class SshCommand extends Thread {
         if(preserve_state) {
             sysupgrade_args = "-c -v";
         }
-        else {
+        else if (force){
+            sysupgrade_args="-n -v -f";
+        } else {
             sysupgrade_args="-n -v";
         }
         String sysupgrade_cmd = String.format("sysupgrade %s /tmp/sysupgrade.bin", sysupgrade_args);
@@ -286,33 +288,33 @@ public abstract class SshCommand extends Thread {
     protected boolean send(String cmd) {
         logger.debug("sending command: {}", cmd);
         if (cmd.contains("GLB1300-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("glb1300.bin", true);
+            return copyCommand("glb1300.bin", true, false);
         } else if (cmd.contains("N750-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("n750.bin", true);
+            return copyCommand("n750.bin", true, false);
         } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("wrt3200acm.bin", true);
+            return copyCommand("wrt3200acm.bin", true, false);
         } else if (cmd.contains("WRT32X-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("wrt32x.bin", true);
+            return copyCommand("wrt32x.bin", true, false);
         } else if (cmd.contains("EA6350-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("ea6350.bin", true);
+            return copyCommand("ea6350.bin", true, false);
         } else if (cmd.contains("GLB1300-FIRMWARE-UPGRADE")) {
-            return copyCommand("glb1300.bin", false);
+            return copyCommand("glb1300.bin", false, false);
         } else if (cmd.contains("N750-FIRMWARE-UPGRADE")) {
-            return copyCommand("n750.bin", false);
+            return copyCommand("n750.bin", false, false);
         } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE")) {
-            return copyCommand("wrt3200acm.bin", false);
+            return copyCommand("wrt3200acm.bin", false, true);
         } else if (cmd.contains("WRT32X-FIRMWARE-UPGRADE")) {
-            return copyCommand("wrt32x.bin", false);
+            return copyCommand("wrt32x.bin", false, true);
         } else if (cmd.contains("EA6350-FIRMWARE-UPGRADE")) {
-            return copyCommand("ea6350.bin", false);
+            return copyCommand("ea6350.bin", false, false);
         } else if (cmd.contains("GLB1300-PRERELEASE-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("glb1300-prerelease.bin", true);
+            return copyCommand("glb1300-prerelease.bin", true, false);
         } else if (cmd.contains("N750-PRERELEASE-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("n750-prerelease.bin", true);
+            return copyCommand("n750-prerelease.bin", true, false);
         } else if (cmd.contains("GLB1300-PRERELEASE-FIRMWARE-UPGRADE")) {
-            return copyCommand("glb1300-prerelease.bin", false);
+            return copyCommand("glb1300-prerelease.bin", false, false);
         } else if (cmd.contains("N750-PRERELEASE-FIRMWARE-UPGRADE")) {
-            return copyCommand("n750-prerelease.bin", false);
+            return copyCommand("n750-prerelease.bin", false, false);
         }
 
         else {
