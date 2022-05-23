@@ -217,7 +217,7 @@ public abstract class SshCommand extends Thread {
             sysupgrade_args = "-c -v";
         }
         else if (force){
-            sysupgrade_args="-n -v -f";
+            sysupgrade_args="-n -v --force";
         } else {
             sysupgrade_args="-n -v";
         }
@@ -289,8 +289,8 @@ public abstract class SshCommand extends Thread {
         logger.debug("sending command: {}", cmd);
         if (cmd.contains("GLB1300-FIRMWARE-UPGRADE-PRESERVE")) {
             return copyCommand("glb1300.bin", true, false);
-        } else if (cmd.contains("N750-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("n750.bin", true, false);
+        } else if (cmd.contains("MR8300-FIRMWARE-UPGRADE-PRESERVE")) {
+            return copyCommand("mr8300.bin", true, false);
         } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE-PRESERVE")) {
             return copyCommand("wrt3200acm.bin", true, false);
         } else if (cmd.contains("WRT32X-FIRMWARE-UPGRADE-PRESERVE")) {
@@ -299,8 +299,8 @@ public abstract class SshCommand extends Thread {
             return copyCommand("ea6350.bin", true, false);
         } else if (cmd.contains("GLB1300-FIRMWARE-UPGRADE")) {
             return copyCommand("glb1300.bin", false, false);
-        } else if (cmd.contains("N750-FIRMWARE-UPGRADE")) {
-            return copyCommand("n750.bin", false, false);
+        } else if (cmd.contains("MR8300-FIRMWARE-UPGRADE")) {
+            return copyCommand("mr8300.bin", false, false);
         } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE")) {
             return copyCommand("wrt3200acm.bin", false, true);
         } else if (cmd.contains("WRT32X-FIRMWARE-UPGRADE")) {
