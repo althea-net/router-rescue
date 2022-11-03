@@ -287,8 +287,8 @@ public abstract class SshCommand extends Thread {
 
     protected boolean send(String cmd) {
         logger.debug("sending command: {}", cmd);
-        if (cmd.contains("GLB1300-FIRMWARE-UPGRADE-PRESERVE")) {
-            return copyCommand("glb1300.bin", true, false);
+        if (cmd.contains("HAPAC2-FIRMWARE-UPGRADE-PRESERVE")) {
+            return copyCommand("hapac2.bin", true, false);
         } else if (cmd.contains("MR8300-FIRMWARE-UPGRADE-PRESERVE")) {
             return copyCommand("mr8300.bin", true, false);
         } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE-PRESERVE")) {
@@ -297,8 +297,8 @@ public abstract class SshCommand extends Thread {
             return copyCommand("wrt32x.bin", true, false);
         } else if (cmd.contains("EA6350-FIRMWARE-UPGRADE-PRESERVE")) {
             return copyCommand("ea6350.bin", true, false);
-        } else if (cmd.contains("GLB1300-FIRMWARE-UPGRADE")) {
-            return copyCommand("glb1300.bin", false, false);
+        } else if (cmd.contains("HAPAC2-FIRMWARE-UPGRADE")) {
+            return copyCommand("hapac2.bin", false, false);
         } else if (cmd.contains("MR8300-FIRMWARE-UPGRADE")) {
             return copyCommand("mr8300.bin", false, false);
         } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE")) {

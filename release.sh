@@ -47,7 +47,7 @@ if test $# -lt 1; then
   curl $assets | jq '.[].browser_download_url' | xargs -P 100 -I {} wget --no-verbose {};
 
   mv *openwrt-ipq40xx-*-linksys_ea6350v3-squashfs-sysupgrade.bin app/src/main/assets/ea6350.bin
-  mv *openwrt-ipq40xx-*-glinet_gl-b1300-squashfs-sysupgrade.bin app/src/main/assets/glb1300.bin
+  mv *openwrt-ipq40xx-mikrotik-mikrotik_hap-ac2-squashfs-sysupgrade.bin app/src/main/assets/hapac2.bin
   mv *openwrt-ipq40xx-*-linksys_mr8300-squashfs-sysupgrade.bin app/src/main/assets/mr8300.bin
   mv *openwrt-mvebu-cortexa9-linksys_wrt3200acm-squashfs-sysupgrade.bin app/src/main/assets/wrt3200acm.bin
   mv *openwrt-mvebu-cortexa9-linksys_wrt32x-squashfs-sysupgrade.bin app/src/main/assets/wrt32x.bin
