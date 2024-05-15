@@ -299,6 +299,10 @@ public abstract class SshCommand extends Thread {
             return copyCommand("ea6350.bin", true, false);
         } else if (cmd.contains("HAPAC2-FIRMWARE-UPGRADE")) {
             return copyCommand("hapac2.bin", false, false);
+        } else if (cmd.contains("HAPAC3-FIRMWARE-UPGRADE")) {
+            return copyCommand("hapac3.bin", false, false);
+        } else if (cmd.contains("HAPAC3-FIRMWARE-UPGRADE-PRESERVE")) {
+            return copyCommand("hapac3.bin", true, false);
         } else if (cmd.contains("MR8300-FIRMWARE-UPGRADE")) {
             return copyCommand("mr8300.bin", false, false);
         } else if (cmd.contains("WRT3200ACM-FIRMWARE-UPGRADE")) {

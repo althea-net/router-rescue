@@ -29,7 +29,7 @@
 # #  mv openwrt-mvebu-cortexa9-linksys-wrt32x-squashfs-sysupgrade.bin app/src/main/assets/wrt32x-prerelease.bin
 # fi
 
-stable=$(curl https://api.github.com/repos/althea-net/althea-firmware/releases/latest);
+stable=$(curl https://api.github.com/repos/althea-net/rita-firmware/releases/latest);
 
 name=$(jq '.name' <<< $stable);
 name="${name%\"}"
@@ -46,11 +46,11 @@ if test $# -lt 1; then
 
   curl $assets | jq '.[].browser_download_url' | xargs -P 100 -I {} wget --no-verbose {};
 
-  mv *openwrt-ipq40xx-*-linksys_ea6350v3-squashfs-sysupgrade.bin app/src/main/assets/ea6350.bin
-  mv *openwrt-ipq40xx-mikrotik-mikrotik_hap-ac2-squashfs-sysupgrade.bin app/src/main/assets/hapac2.bin
-  mv *openwrt-ipq40xx-*-linksys_mr8300-squashfs-sysupgrade.bin app/src/main/assets/mr8300.bin
-  mv *openwrt-mvebu-cortexa9-linksys_wrt3200acm-squashfs-sysupgrade.bin app/src/main/assets/wrt3200acm.bin
-  mv *openwrt-mvebu-cortexa9-linksys_wrt32x-squashfs-sysupgrade.bin app/src/main/assets/wrt32x.bin
+  mv hawk-managed-*-openwrt-ipq40xx-*-linksys_ea6350v3-squashfs-sysupgrade.bin app/src/main/assets/ea6350.bin
+  mv hawk-managed-*-openwrt-ipq40xx-mikrotik-mikrotik_hap-ac3-squashfs-sysupgrade.bin app/src/main/assets/hapac3.bin
+  mv hawk-managed-*-openwrt-ipq40xx-mikrotik-mikrotik_hap-ac2-squashfs-sysupgrade.bin app/src/main/assets/hapac2.bin
+  mv hawk-managed-*-openwrt-mvebu-cortexa9-linksys_wrt3200acm-squashfs-sysupgrade.bin app/src/main/assets/wrt3200acm.bin
+  mv hawk-managed-*-openwrt-mvebu-cortexa9-linksys_wrt32x-squashfs-sysupgrade.bin app/src/main/assets/wrt32x.bin
   rm *openwrt*
 fi
 

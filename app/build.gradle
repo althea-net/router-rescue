@@ -4,14 +4,14 @@ android {
     lintOptions {
         abortOnError false
     }
-    compileSdkVersion 31
-    buildToolsVersion "31.0.0"
+    compileSdkVersion 33
+    buildToolsVersion "33.0.0"
     defaultConfig {
         applicationId "org.althea.routerrescue"
         minSdkVersion 16
-        targetSdkVersion 31
-        versionCode 171
-        versionName "1.0.71"
+        targetSdkVersion 33
+        versionCode 186
+        versionName "1.0.86"
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [eventBusIndex: 'org.althea.routerrescue.EventBusIndex']
